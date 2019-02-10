@@ -94,18 +94,18 @@ class mainScene {
         var yAxis = pad ? pad.axes[1].getValue(0) : 0;
 
         // Handle horizontal movements
-        if (keys.right.isDown || pad.right || xAxis > 0) {
+        if (keys.right.isDown || xAxis > 0) {
             // If the right keys1 is pressed, move to the right
             player.x += 3;
-        } else if (keys.left.isDown || pad.left || xAxis < 0) {
+        } else if (keys.left.isDown || xAxis < 0) {
             // If the left keys1 is pressed, move to the left
             player.x -= 3;
         }
 
         // Do the same for vertical movements
-        if (keys.down.isDown || pad.down || yAxis > 0) {
+        if (keys.down.isDown || yAxis > 0) {
             player.y += 3;
-        } else if (keys.up.isDown || pad.up || yAxis < 0) {
+        } else if (keys.up.isDown || yAxis < 0) {
             player.y -= 3;
         }
     }
