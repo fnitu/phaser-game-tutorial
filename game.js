@@ -20,14 +20,18 @@ class mainScene {
         //create the coin
         this.coin = this.physics.add.sprite(300, 300, 'coin');
 
-        // Store the scores in a variable, initialized at 0
-        this.score1 = 0;
-        this.score2 = 0;
+        // Store the scores in an object, with a value attribute initialized at 0
+        this.score1 = {
+            value: 0
+        };
+        this.score2 = {
+            value : 0
+        };
 
 
         // Display the scores in the top left corner and the top right corner
-        this.scoreText1 = this.createScoreText(this.score1, 20, 20, '#FA8072', 'WASD / Gamepad 1');
-        this.scoreText2 = this.createScoreText(this.score2, 500, 20, '#98FB98', 'Arrows / Gamepad 2');
+        this.score1.text = this.createScoreText(this.score1.value, 20, 20, '#FA8072', 'WASD / Gamepad 1');
+        this.score2.text = this.createScoreText(this.score2.value, 500, 20, '#98FB98', 'Arrows / Gamepad 2');
 
         // player 1 will use WASD
         // the returned object will have the same properties as the cursor keys, so it's easier to work with them
@@ -79,13 +83,13 @@ class mainScene {
         // If the player 1 is overlapping with the coin
         if (this.physics.overlap(this.player1, this.coin)) {
             // Call the new hit() method
-            this.hit(this.player1, this.score1, this.scoreText1);
+            this.hit(this.player1, this.score1);
         }
 
         // If the player 2 is overlapping with the coin
         if (this.physics.overlap(this.player2, this.coin)) {
             // Call the new hit() method
-            this.hit(this.player2, this.score2, this.scoreText2);
+            this.hit(this.player2, this.score2);
         }
     }
 
@@ -110,16 +114,16 @@ class mainScene {
         }
     }
 
-    hit(player, score, scoreText) {
+    hit(player, score) {
         // Change the position x and y of the coin randomly
         this.coin.x = Phaser.Math.Between(100, 600);
         this.coin.y = Phaser.Math.Between(100, 300);
 
         // Increment the score by 10
-        score += 10;
+        score.value += 10;
 
         // Display the updated score on the screen
-        scoreText.setText('score: ' + score);
+        score.text.setText('score: ' + score.value);
 
         // Create a new tween
         this.tweens.add({
